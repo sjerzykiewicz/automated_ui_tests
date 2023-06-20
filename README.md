@@ -16,7 +16,7 @@ Automated UI tests for [saucedemo](https://www.saucedemo.com/) app
 
 3. Activate the virtual environment
 
-    `.\.venv\Scripts\activate`
+    `source .venv\bin\activate`
 
 4. Install dependencies
 
