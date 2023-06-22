@@ -12,14 +12,10 @@ Automated UI tests for [saucedemo](https://www.saucedemo.com/) app
 
 2. Create a virtual environment
 
-    `python -m venv .venv`
+    `virtualenv .venv`
 
-3. Activate the virtual environment
+3. Install dependencies
 
-    `source .venv\bin\activate`
+    `.venv/Scripts/pip install -r requirements.txt`
 
-4. Install dependencies
-
-    `pip install -r requirements.txt`
-
-5. If you do not have Firefox browser already installed, download it from [here](https://www.mozilla.org/en-US/firefox/new/)
+4. If you do not have Firefox browser already installed, download it from [here](https://www.mozilla.org/en-US/firefox/new/)
