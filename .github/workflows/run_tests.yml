@@ -1,0 +1,38 @@
+name: test
+
+on:
+  push:
+    branches: 
+      - main
+    
+  workflow_dispatch:
+
+jobs:
+
+  build:
+  
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Setup Python
+        uses: actions/setup-python@v2.3.1
+        with:
+          python-version: 3.11.1
+          cache: pip
+          
+      - name: Install packages
+        run: |
+          pip install -r requirements.txt
+          wget https://github.com/mozilla/geckodriver/releases/download/v0.23.0/geckodriver-v0.23.0-linux64.tar.gz
+          sudo sh -c 'tar -x geckodriver -zf geckodriver-v0.23.0-linux64.tar.gz -O > /usr/bin/geckodriver'
+          sudo chmod +x /usr/bin/geckodriver
+          rm geckodriver-v0.23.0-linux64.tar.gz
+          
+      - name: Run tests
+        run: pytest
+        
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PIPELINE: actions
