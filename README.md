@@ -2,7 +2,7 @@
 Automated UI tests for [saucedemo](https://www.saucedemo.com/) app
 
 ## Requirements
-- Python 3.9+
+- Python 3.11.1
 - Firefox browser
 
 ## Installation
@@ -24,3 +24,6 @@ Automated UI tests for [saucedemo](https://www.saucedemo.com/) app
 1. Run pytest
 
     `.venv/Scripts/pytest`
+
+## GitHub Actions
+Tests are run automatically on every push to the main branch. You can find the results [here](https://github.com/sjerzykiewicz/automated_ui_tests/actions/)
