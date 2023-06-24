@@ -19,3 +19,8 @@ Automated UI tests for [saucedemo](https://www.saucedemo.com/) app
     `.venv/Scripts/pip install -r requirements.txt`
 
 4. If you do not have Firefox browser already installed, download it from [here](https://www.mozilla.org/en-US/firefox/new/)
+
+## Running tests
+1. Run pytest
+
+    `.venv/Scripts/pytest`
