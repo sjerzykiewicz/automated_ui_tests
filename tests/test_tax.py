@@ -12,7 +12,7 @@ from automated_ui_tests.config import config
 def test_setup():
     global driver
     options = Options()
-    if os.environ["PIPELINE"] == "actions":
+    if "GITHUB_TOKEN" in os.environ:
         options.add_argument("--headless")
     driver = webdriver.Firefox(options=options)
 
