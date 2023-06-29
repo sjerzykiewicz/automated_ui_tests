@@ -19,6 +19,9 @@ def test_setup():
 
     driver.maximize_window()
 
+    global page
+    page = Page(driver)
+
     yield
     driver.close()
     driver.quit()
@@ -31,9 +34,7 @@ def test_users_login(test_setup):
     driver.get(config["url"])
     result = True
     for user in ["standard_user", "problem_user", "performance_glitch_user"]:
-        driver.find_element(By.XPATH, Page.user_name).send_keys(config[user])
-        driver.find_element(By.XPATH, Page.password).send_keys(config["password"])
-        driver.find_element(By.XPATH, Page.login_button).click()
+        page.login(config[user], config["password"])
 
         cookies = driver.get_cookies()
         cookies_dict = {}
@@ -42,8 +43,7 @@ def test_users_login(test_setup):
 
         result = cookies_dict["session-username"] == config[user]
 
-        driver.find_element(By.XPATH, Page.burger_menu).click()
-        driver.find_element(By.XPATH, Page.logout).click()
+        page.logout()
     assert result
 
 
@@ -52,14 +52,12 @@ def test_locked_out_user_login(test_setup):
     Test if locked out user can not login
     """
     driver.get(config["url"])
-    driver.find_element(By.XPATH, Page.user_name).send_keys(config["locked_out_user"])
-    driver.find_element(By.XPATH, Page.password).send_keys(config["password"])
-    driver.find_element(By.XPATH, Page.login_button).click()
+    page.login(config["locked_out_user"], config["password"])
 
     assert (
         driver.find_element(
             By.XPATH,
-            Page.alert_box,
+            page.alert_box,
         ).text
         == "Epic sadface: Sorry, this user has been locked out."
     )

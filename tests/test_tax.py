@@ -19,6 +19,9 @@ def test_setup():
 
     driver.maximize_window()
 
+    global page
+    page = Page(driver)
+
     yield
     driver.close()
     driver.quit()
@@ -29,9 +32,7 @@ def test_standard_user_tax(test_setup):
     Test if tax is calculated correctly and if total price is correct
     """
     driver.get(config["url"])
-    driver.find_element(By.XPATH, Page.user_name).send_keys(config["standard_user"])
-    driver.find_element(By.XPATH, Page.password).send_keys(config["password"])
-    driver.find_element(By.XPATH, Page.login_button).click()
+    page.login(config["standard_user"], config["password"])
 
     items = driver.find_elements(By.CLASS_NAME, Page.items_class)
     price_total = 0
@@ -41,13 +42,9 @@ def test_standard_user_tax(test_setup):
         )
         item.find_element(By.CLASS_NAME, Page.item_buy_btn_class).click()
 
-    driver.find_element(By.CLASS_NAME, Page.shopping_cart_class).click()
-    driver.find_element(By.XPATH, Page.checkout_btn).click()
+    page.checkout()
 
-    driver.find_element(By.XPATH, Page.first_name).send_keys(config["standard_user"])
-    driver.find_element(By.XPATH, Page.last_name).send_keys("test")
-    driver.find_element(By.XPATH, Page.postal_code).send_keys("12-345")
-    driver.find_element(By.XPATH, Page.continue_btn).click()
+    page.fill_checkout_form()
 
     tax = float(driver.find_element(By.CLASS_NAME, Page.tax_label).text[6:])
     total = float(driver.find_element(By.CLASS_NAME, Page.total_label).text[8:])
