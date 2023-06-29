@@ -25,6 +25,9 @@ def test_setup():
 
 
 def test_standard_user_tax(test_setup):
+    """
+    Test if tax is calculated correctly and if total price is correct
+    """
     driver.get(config["url"])
     driver.find_element(By.XPATH, Page.user_name).send_keys(config["standard_user"])
     driver.find_element(By.XPATH, Page.password).send_keys(config["password"])

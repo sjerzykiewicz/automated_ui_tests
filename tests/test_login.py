@@ -25,6 +25,9 @@ def test_setup():
 
 
 def test_users_login(test_setup):
+    """
+    Test if all users can login
+    """
     driver.get(config["url"])
     result = True
     for user in ["standard_user", "problem_user", "performance_glitch_user"]:
@@ -45,6 +48,9 @@ def test_users_login(test_setup):
 
 
 def test_locked_out_user_login(test_setup):
+    """
+    Test if locked out user can not login
+    """
     driver.get(config["url"])
     driver.find_element(By.XPATH, Page.user_name).send_keys(config["locked_out_user"])
     driver.find_element(By.XPATH, Page.password).send_keys(config["password"])

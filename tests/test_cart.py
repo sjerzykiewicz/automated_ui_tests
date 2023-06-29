@@ -25,6 +25,9 @@ def test_setup():
 
 
 def test_standard_user_cart_prices(test_setup):
+    """
+    Test if cart total price is equal to sum of items prices
+    """
     driver.get(config["url"])
     driver.find_element(By.XPATH, Page.user_name).send_keys(config["standard_user"])
     driver.find_element(By.XPATH, Page.password).send_keys(config["password"])
@@ -54,6 +57,9 @@ def test_standard_user_cart_prices(test_setup):
 
 
 def test_standard_user_cart_items(test_setup):
+    """
+    Test if cart contains all items added to it
+    """
     driver.get(config["url"])
     driver.find_element(By.XPATH, Page.user_name).send_keys(config["standard_user"])
     driver.find_element(By.XPATH, Page.password).send_keys(config["password"])
